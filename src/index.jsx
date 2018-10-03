@@ -11,10 +11,6 @@ import configureStore from './configureStore';
 // Pages
 import APOD from './APOD';
 
-// Navigation and Footer
-import Navigation from './Navigation';
-import Footer from './Footer';
-
 const store = configureStore();
 
 const Router = ({ component: Component, ...rest}) => (
@@ -22,9 +18,7 @@ const Router = ({ component: Component, ...rest}) => (
     {...rest}
     render={renderProps => (
       <>
-        <Navigation />
         <Component {...renderProps} />
-        <Footer />
       </>
     )}
   />
