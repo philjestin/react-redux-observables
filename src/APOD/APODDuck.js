@@ -28,7 +28,7 @@ const TYPES = freezeObject(
 );
 
 export const Actions = Object.freeze({
-  getAPOD: () => mkAction(TYPES.GET_APOD),
+  getAPOD: date => mkAction(TYPES.GET_APOD, date),
   setAPOD: data => mkAction(TYPES.SET_APOD, data),
   getAPODFailure: error => mkAction(TYPES.ERROR, error),
 });
@@ -37,8 +37,8 @@ export const EpicCreators = Object.freeze({
   getApod: action$ =>
     action$.pipe(
       ofType(TYPES.GET_APOD),
-      switchMap(() =>
-        ajax.getJSON(APOD_URL).pipe(
+      switchMap(action =>
+        ajax.getJSON(`${APOD_URL}&date=${action.payload}`).pipe(
           map( res =>
             Actions.setAPOD(res)
           ),

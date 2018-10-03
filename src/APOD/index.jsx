@@ -7,6 +7,8 @@ import { bindActionCreators } from 'redux';
 
 import { Actions } from './APODDuck.js';
 
+import DateInput from './DateInput';
+
 import './styles.scss';
 
 class APOD extends Component {
@@ -26,11 +28,11 @@ class APOD extends Component {
 
   componentDidMount() {
     const { actions } = this.props;
-    actions.getAPOD();
+    actions.getAPOD('2018-10-02');
   }
 
   render() {
-    const { data, error, stage } = this.props;
+    const { actions, data, error, stage } = this.props;
 
     return (
       <div className="apod">
@@ -43,6 +45,8 @@ class APOD extends Component {
         <p>
           NASA Picture of the day
         </p>
+
+        <DateInput getAPOD={actions.getAPOD} />
 
         {error &&
           (
