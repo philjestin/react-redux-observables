@@ -54,7 +54,7 @@ class APOD extends Component {
           )
         }
         {data.get('url') &&
-          <img alt="space" src={data.url} />
+          <img alt="space" src={data.get('url')} />
         }
       </div>
     );
